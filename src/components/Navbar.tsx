@@ -331,7 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-2 shrink-0 relative overflow-visible">
           {/* Direct Download .EXE Button */}
           <a
-            href="https://github.com/rsoran/emu8086-modern/releases/latest"
+            href="https://github.com/rsoran/emu8086-modern/releases"
             target="_blank"
             rel="noopener noreferrer"
             className="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold gap-1.5 border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 transition shadow-sm active:scale-95 flex items-center"
