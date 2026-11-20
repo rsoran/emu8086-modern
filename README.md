@@ -7,6 +7,20 @@ Created with ❤️ by **[Ravindra Soran](https://github.com/rsoran)** (`@rsoran
 
 ---
 
+## 📥 Direct Downloads & Launch
+
+No compiling or command lines needed — download the direct desktop executable for your platform or open in your browser:
+
+| Platform | Type | Direct Download Link |
+| :--- | :--- | :--- |
+| 🪟 **Windows** | Native Installer (`.exe`) | [**📥 Download for Windows (.exe)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Windows-x64.exe) |
+| 📦 **Windows Portable** | Standalone Zero-Install (`.zip`) | [**📦 Download Windows Portable (.zip)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Windows-x64.zip) |
+| 🍏 **macOS** | Apple Silicon & Intel (`.dmg`) | [**🍏 Download macOS (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/latest) |
+| 🐧 **Linux** | Universal Package (`.AppImage`) | [**🐧 Download Linux (.AppImage)**](https://github.com/rsoran/emu8086-modern/releases/latest) |
+| 🌐 **Live Web App** | Run in any browser (Zero Install) | [**🚀 Open Web Studio Online**](https://rsoran.github.io/emu8086-modern/) |
+
+---
+
 ## ✨ Features
 
 * **⚡ Complete 8086 Real Mode CPU**:
@@ -48,7 +62,9 @@ Created with ❤️ by **[Ravindra Soran](https://github.com/rsoran)** (`@rsoran
 
 ---
 
-## 🚀 Quickstart
+## 🚀 Developer Guide (Optional: Build from Source)
+
+If you wish to build or customize the source code yourself:
 
 ### 1. Run in Development Mode
 ```bash
@@ -70,38 +86,10 @@ npm run build
 npm run preview
 ```
 
----
-
-## 📦 Cross-Platform Desktop Builds
-
-Modern Emu8086 can be packaged as native desktop apps for **Windows, macOS, and Linux**.
-
-### Build Windows `.exe`
-```bash
-npm run electron:build:win
-```
-Outputs:
-* `release/Modern Emu8086-Windows-1.0.0-x64.exe` (NSIS Installer)
-* `release/Modern Emu8086-Windows-1.0.0-x64-portable.exe` (Standalone Portable)
-
-### Build macOS `.dmg`
-```bash
-npm run electron:build:mac
-```
-Outputs:
-* `release/Modern Emu8086-macOS-1.0.0-arm64.dmg` (Apple Silicon)
-* `release/Modern Emu8086-macOS-1.0.0-x64.dmg` (Intel)
-
-### Build Linux `.AppImage` / `.deb`
-```bash
-npm run electron:build:linux
-```
-Outputs:
-* `release/Modern Emu8086-Linux-1.0.0-x64.AppImage`
-* `release/Modern Emu8086-Linux-1.0.0-x64.deb`
-
-### Automated Cloud Builds via GitHub Actions
-Every time a version tag is pushed (e.g. `git tag v1.0.0 && git push origin v1.0.0`), the included [.github/workflows/build-cross-platform.yml](.github/workflows/build-cross-platform.yml) workflow builds and publishes binaries for Windows, macOS, and Linux automatically.
+### 3. Build Desktop Binaries Locally
+* **Windows `.exe`**: `npm run electron:build:win`
+* **macOS `.dmg`**: `npm run electron:build:mac`
+* **Linux `.AppImage`**: `npm run electron:build:linux`
 
 ---
 
