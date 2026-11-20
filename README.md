@@ -11,13 +11,17 @@ Created with ❤️ by **[Ravindra Soran](https://github.com/rsoran)** (`@rsoran
 
 No compiling or command lines needed — download the direct desktop executable for your platform or open in your browser:
 
-| Platform | Type | Direct Download Link |
-| :--- | :--- | :--- |
-| 🪟 **Windows** | Native Installer (`.exe`) | [**📥 Download for Windows (.exe)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Windows-x64.exe) |
-| 📦 **Windows Portable** | Standalone Zero-Install (`.zip`) | [**📦 Download Windows Portable (.zip)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Windows-x64.zip) |
-| 🍏 **macOS** | Apple Silicon & Intel (`.dmg`) | [**🍏 Download macOS (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/latest) |
-| 🐧 **Linux** | Universal Package (`.AppImage`) | [**🐧 Download Linux (.AppImage)**](https://github.com/rsoran/emu8086-modern/releases/latest) |
-| 🌐 **Live Web App** | Run in any browser (Zero Install) | [**🚀 Open Web Studio Online**](https://rsoran.github.io/emu8086-modern/) |
+| Platform | Type | Direct Download Link | Size |
+| :--- | :--- | :--- | :--- |
+| 🪟 **Windows** | Standalone Executable (`.exe`) | [**📥 Download for Windows (.exe)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Windows-1.0.0-x64.exe) | ~188 MB |
+| 📦 **Windows Portable** | Standalone Zero-Install (`.zip`) | [**📦 Download Windows Portable (.zip)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Windows-1.0.0-x64.zip) | ~137 MB |
+| 🍏 **macOS (Apple Silicon)** | M1/M2/M3/M4 Disk Image (`.dmg`) | [**🍏 Download macOS ARM64 (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-macOS-1.0.0-arm64.dmg) | 115 MB |
+| 🍏 **macOS (Intel)** | Intel x86_64 Disk Image (`.dmg`) | [**🍏 Download macOS x64 (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-macOS-1.0.0-x64.dmg) | 119 MB |
+| 🐧 **Linux (Universal)** | All Linux Distributions (`.AppImage`) | [**🐧 Download Linux (.AppImage)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Linux-1.0.0-x86_64.AppImage) | 125 MB |
+| 🐧 **Linux (Debian/Ubuntu)** | Debian Package (`.deb`) | [**🐧 Download Debian/Ubuntu (.deb)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Linux-1.0.0-amd64.deb) | 83.6 MB |
+| 🌐 **Live Web App** | Run in any browser (Zero Install) | [**🚀 Open Web Studio Online**](https://rsoran.github.io/emu8086-modern/) | Instant |
+
+👉 **[View All Release Assets on GitHub](https://github.com/rsoran/emu8086-modern/releases)**
 
 ---
 
