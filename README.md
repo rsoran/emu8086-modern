@@ -9,9 +9,11 @@ Created with ❤️ by **[Ravindra Soran](https://github.com/rsoran)** (`@rsoran
 
 ## 📥 Direct Downloads & Launch
 
-No compiling or command lines needed — download the direct desktop executable for your platform or open in your browser:
+All pre-compiled release binaries and installers are available directly on the **[Releases Page](https://github.com/rsoran/emu8086-modern/releases)**:
 
-| Platform | Type | Direct Download Link | Size |
+👉 **[Go to Latest Release (v1.0.0)](https://github.com/rsoran/emu8086-modern/releases/tag/v1.0.0)**
+
+| Platform | Type | Download Link | Size |
 | :--- | :--- | :--- | :--- |
 | 🪟 **Windows** | Standalone Executable (`.exe`) | [**📥 Download for Windows (.exe)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Windows-1.0.0-x64.exe) | ~188 MB |
 | 📦 **Windows Portable** | Standalone Zero-Install (`.zip`) | [**📦 Download Windows Portable (.zip)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Windows-1.0.0-x64.zip) | ~137 MB |
@@ -21,7 +23,7 @@ No compiling or command lines needed — download the direct desktop executable 
 | 🐧 **Linux (Debian/Ubuntu)** | Debian Package (`.deb`) | [**🐧 Download Debian/Ubuntu (.deb)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.0.0/Modern-Emu8086-Linux-1.0.0-amd64.deb) | 83.6 MB |
 | 🌐 **Live Web App** | Run in any browser (Zero Install) | [**🚀 Open Web Studio Online**](https://rsoran.github.io/emu8086-modern/) | Instant |
 
-👉 **[View All Release Assets on GitHub](https://github.com/rsoran/emu8086-modern/releases)**
+*(You can also browse and download all files directly from the [GitHub Releases Page](https://github.com/rsoran/emu8086-modern/releases)).*
 
 ---
 
