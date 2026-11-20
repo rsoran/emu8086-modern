@@ -25,6 +25,9 @@ All pre-compiled release binaries and installers are available directly on the *
 
 *(You can also browse and download all files directly from the [GitHub Releases Page](https://github.com/rsoran/emu8086-modern/releases)).*
 
+> [!TIP]
+> **Windows SmartScreen Note**: Because this is a newly published open-source project without a paid corporate code-signing certificate, Windows SmartScreen may show an "Unrecognized app" prompt on first launch. Simply click **"More info"** $\rightarrow$ **"Run anyway"**.
+
 ---
 
 ## ✨ Features
