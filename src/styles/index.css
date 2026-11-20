@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #f0f4f9;
+    --bg-surface: rgba(255, 255, 255, 0.72);
+    --border-glass: rgba(255, 255, 255, 0.65);
+    --border-subtle: rgba(203, 213, 225, 0.65);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+  }
+
+  .dark {
+    --bg-primary: #070b13;
+    --bg-surface: rgba(15, 23, 42, 0.65);
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --border-subtle: rgba(51, 65, 85, 0.5);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Ambient Liquid Glass Mesh Background */
+.liquid-ambient-dark {
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.14), transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(14, 165, 233, 0.12), transparent 50%),
+    #070b13;
+}
+
+.liquid-ambient-light {
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(186, 230, 253, 0.55), transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(224, 231, 255, 0.55), transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(207, 250, 254, 0.45), transparent 50%),
+    #f0f4f9;
+}
+
+/* Frosted Glass Acrylic Panel */
+.glass-panel {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 0.85rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.light .glass-panel, :root:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 25px -5px rgba(148, 163, 184, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Glass Buttons with Specular Bevel */
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  user-select: none;
+}
+
+.glass-btn:active {
+  transform: scale(0.97);
+}
+
+.dark .glass-btn {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-btn:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.light .glass-btn, :root:not(.dark) .glass-btn {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.8) 100%);
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  color: #1e293b;
+  box-shadow: 0 2px 5px rgba(100, 116, 139, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.light .glass-btn:hover, :root:not(.dark) .glass-btn:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+/* Primary Glass Action (Blue Glow) */
+.glass-btn-primary {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
+  border: 1px solid #60a5fa !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+.glass-btn-primary:hover {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%) !important;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.5) !important;
+}
+
+/* Green Run Button */
+.glass-btn-success {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%) !important;
+  border: 1px solid #34d399 !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+:root:not(.dark) ::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.5);
+}
+
+:root:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border-radius: 9999px;
+}
+
+:root:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.65);
+}
+
+/* Value change pulse animation */
+@keyframes register-pulse {
+  0% {
+    background-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 14px rgba(59, 130, 246, 0.6);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.changed-value {
+  animation: register-pulse 1.2s ease-out;
+}
+
+/* CRT Screen Scanline Effect */
+.crt-screen {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 20;
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+}
+
+/* Monaco editor custom breakpoint glyph */
+.glyph-breakpoint {
+  background: #ef4444;
+  border-radius: 50%;
+  width: 10px !important;
+  height: 10px !important;
+  margin-left: 5px;
+  margin-top: 4px;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+.active-execution-line {
+  background: rgba(59, 130, 246, 0.25) !important;
+  border-left: 3px solid #3b82f6 !important;
+}
+
+/* Classic Emu8086 bright blue execution selection bar */
+.emu-active-row {
+  background-color: #0000ff !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}

@@ -1,0 +1,110 @@
+# Modern Emu8086 🚀
+
+> **A modern, cross-platform 8086 Microprocessor Studio, Assembler, and Bitwise Debugger.**  
+> Re-imagining the classic Emu8086 emulator with a frosted Liquid Glass aesthetic, real-time memory variable inspection, interactive virtual hardware peripherals, and multi-OS desktop distribution.
+
+Created with ❤️ by **[Ravindra Soran](https://github.com/rsoran)** (`@rsoran`).
+
+---
+
+## ✨ Features
+
+* **⚡ Complete 8086 Real Mode CPU**:
+  * 16-bit register architecture (`AX`, `BX`, `CX`, `DX`, `SI`, `DI`, `BP`, `SP`, `IP`, `CS`, `DS`, `SS`, `ES`).
+  * Live Flags Register (`CF`, `PF`, `AF`, `ZF`, `SF`, `TF`, `IF`, `DF`, `OF`) with clickable toggles.
+  * Segmented execution model (`DATA SEGMENT`, `CODE SEGMENT`, `ASSUME`, `ORG 100h`).
+  * Full support for MS-DOS interrupts (`INT 21h`, `INT 10h`, `INT 16h`).
+* **⏪ Step Back (Execution Undo)**: Reverse execution state instruction by instruction with full memory-diff snapshots.
+* **🔍 Live Variable & Memory Inspector (`[vars]`)**:
+  * Real-time memory variable table reading directly from CPU memory (`cpu.readByte` / `cpu.readWord`).
+  * Displays **Hex** (`92h`), **Decimal** ($146$, signed: $-110$), **ASCII Character**, and **Binary** (`10010010b`).
+  * Inline editing of memory variables directly from the UI.
+* **🧮 8086 Hex Calculator & Bitwise Verifier**:
+  * Instant multi-base conversions (**HEX**, **DEC**, **BIN**, **OCT**, ASCII).
+  * 8-bit (`BYTE`), 16-bit (`WORD`), and 32-bit (`DWORD`) bit modes.
+  * Real-time 8086 Flag Simulator: automatically calculates `CF`, `ZF`, `SF`, `OF`, `PF` for arithmetic and logic operations.
+  * Quick Register Injection (`AL`, `AH`, `AX`, `BX`, `CX`, `DX`).
+* **🚥 Virtual Hardware Peripherals**:
+  * **Traffic Lights Controller**: 4-way intersection simulation controlled via Port `4`.
+  * **Stepper Motor**: Visual motor angle and phase stepping via Port `7`.
+  * **7-Segment Display**: Multi-digit digital display via Port `199`.
+  * **Thermometer & Thermostat**: Temperature sensor and heater relay via Port `125`.
+* **🎨 Liquid Glass UI**:
+  * Frosted glassmorphism with dynamic ambient fluid glows.
+  * Seamless **Dark Mode** and **Light Mode** switching.
+  * Pinned bottom toolbar (`[screen]`, `[source]`, `[reset]`, `[aux]`, `[vars]`, `[debug]`, `[stack]`, `[flags]`, `[calc]`).
+* **💡 Offline Deterministic Code Intelligence**:
+  * Local Monaco editor autocompletion (100% deterministic, **strictly zero AI/LLM dependencies**).
+  * Hover manuals for all 8086 opcodes, addressing modes, and DOS interrupts.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend**: React 18, TypeScript 5, Vite 5, Tailwind CSS
+* **Code Editor**: Monaco Editor (VS Code core)
+* **Icons & UI**: Lucide Icons, Glassmorphism CSS
+* **Desktop Packaging**: Electron, Electron Builder, GitHub Actions CI/CD
+
+---
+
+## 🚀 Quickstart
+
+### 1. Run in Development Mode
+```bash
+# Clone the repository
+git clone https://github.com/rsoran/emu8086-modern.git
+cd emu8086-modern
+
+# Install dependencies
+npm install
+
+# Start local web dev server
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 2. Build for Web / Production
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+## 📦 Cross-Platform Desktop Builds
+
+Modern Emu8086 can be packaged as native desktop apps for **Windows, macOS, and Linux**.
+
+### Build Windows `.exe`
+```bash
+npm run electron:build:win
+```
+Outputs:
+* `release/Modern Emu8086-Windows-1.0.0-x64.exe` (NSIS Installer)
+* `release/Modern Emu8086-Windows-1.0.0-x64-portable.exe` (Standalone Portable)
+
+### Build macOS `.dmg`
+```bash
+npm run electron:build:mac
+```
+Outputs:
+* `release/Modern Emu8086-macOS-1.0.0-arm64.dmg` (Apple Silicon)
+* `release/Modern Emu8086-macOS-1.0.0-x64.dmg` (Intel)
+
+### Build Linux `.AppImage` / `.deb`
+```bash
+npm run electron:build:linux
+```
+Outputs:
+* `release/Modern Emu8086-Linux-1.0.0-x64.AppImage`
+* `release/Modern Emu8086-Linux-1.0.0-x64.deb`
+
+### Automated Cloud Builds via GitHub Actions
+Every time a version tag is pushed (e.g. `git tag v1.0.0 && git push origin v1.0.0`), the included [.github/workflows/build-cross-platform.yml](.github/workflows/build-cross-platform.yml) workflow builds and publishes binaries for Windows, macOS, and Linux automatically.
+
+---
+
+## 📄 License
+
+MIT License © 2026 [Ravindra Soran](https://github.com/rsoran).
