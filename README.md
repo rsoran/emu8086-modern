@@ -9,21 +9,21 @@ Created with ❤️ by **[Ravindra Soran](https://github.com/rsoran)** (`@rsoran
 
 ## 📥 Direct Downloads & Launch
 
-All pre-compiled release binaries and installers are available directly on the **[Latest Release Page](https://github.com/rsoran/emu8086-modern/releases/latest)**:
+All pre-compiled release binaries and installers for **v1.1** are available directly on GitHub Releases:
 
-👉 **[Go to Latest Release (v1.1)](https://github.com/rsoran/emu8086-modern/releases/latest)**
+👉 **[Go to Release v1.1 Page](https://github.com/rsoran/emu8086-modern/releases/tag/v1.1)**
 
 | Platform | Type | Direct Download Link | Size |
 | :--- | :--- | :--- | :--- |
-| 🪟 **Windows** | Setup Installer (`.exe`) | [**📥 Download Windows Installer (.exe)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Windows-1.1.0-x64.exe) | ~98 MB |
-| 📦 **Windows Portable** | Standalone Zero-Install (`.zip`) | [**📦 Download Windows Portable (.zip)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Windows-1.1.0-x64.zip) | ~137 MB |
-| 🍏 **macOS (Apple Silicon)** | M1/M2/M3/M4 Disk Image (`.dmg`) | [**🍏 Download macOS ARM64 (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-macOS-1.1.0-arm64.dmg) | ~115 MB |
-| 🍏 **macOS (Intel)** | Intel x86_64 Disk Image (`.dmg`) | [**🍏 Download macOS x64 (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-macOS-1.1.0-x64.dmg) | ~119 MB |
-| 🐧 **Linux (Universal)** | All Linux Distributions (`.AppImage`) | [**🐧 Download Linux (.AppImage)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Linux-1.1.0-x86_64.AppImage) | ~125 MB |
-| 🐧 **Linux (Debian/Ubuntu)** | Debian Package (`.deb`) | [**🐧 Download Debian/Ubuntu (.deb)**](https://github.com/rsoran/emu8086-modern/releases/latest/download/Modern-Emu8086-Linux-1.1.0-amd64.deb) | ~83.6 MB |
+| 🪟 **Windows** | Setup Installer (`.exe`) | [**📥 Download Windows Installer (.exe)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern-Emu8086-Windows-1.1.0-x64.exe) | 93.8 MB |
+| 📦 **Windows Portable** | Standalone Zero-Install (`.zip`) | [**📦 Download Windows Portable (.zip)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern-Emu8086-Windows-1.1.0-x64.zip) | 126 MB |
+| 🍏 **macOS (Apple Silicon)** | M1/M2/M3/M4 Disk Image (`.dmg`) | [**🍏 Download macOS ARM64 (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-macOS-1.1.0-arm64.dmg) | 115 MB |
+| 🍏 **macOS (Intel)** | Intel x86_64 Disk Image (`.dmg`) | [**🍏 Download macOS x64 (.dmg)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-macOS-1.1.0-x64.dmg) | 119 MB |
+| 🐧 **Linux (Universal)** | All Linux Distributions (`.AppImage`) | [**🐧 Download Linux (.AppImage)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-Linux-1.1.0-x86_64.AppImage) | 125 MB |
+| 🐧 **Linux (Debian/Ubuntu)** | Debian Package (`.deb`) | [**🐧 Download Debian/Ubuntu (.deb)**](https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-Linux-1.1.0-amd64.deb) | 82 MB |
 | 🌐 **Live Web App** | Run in any browser (Zero Install) | [**🚀 Open Web Studio Online**](https://rsoran.github.io/emu8086-modern/) | Instant |
 
-*(You can also browse and download all files directly from the [GitHub Releases Page](https://github.com/rsoran/emu8086-modern/releases/latest)).*
+*(You can also browse all 10 release assets directly on the [GitHub Release v1.1 Page](https://github.com/rsoran/emu8086-modern/releases/tag/v1.1)).*
 
 > [!TIP]
 > **Windows SmartScreen Note**: Because this is a newly published open-source project without a paid corporate code-signing certificate, Windows SmartScreen may show an "Unrecognized app" prompt on first launch. Simply click **"More info"** $\rightarrow$ **"Run anyway"**.
