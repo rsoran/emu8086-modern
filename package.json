@@ -1,6 +1,6 @@
 {
   "name": "emu8086-modern",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Modern, cross-platform 8086 Microprocessor Emulator, Assembler, and Bitwise Debugger Studio",
   "author": "Ravindra Soran <https://github.com/rsoran>",
   "repository": {

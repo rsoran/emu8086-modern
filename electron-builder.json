@@ -12,17 +12,18 @@
     "package.json"
   ],
   "win": {
+    "verifyUpdateCodeSignature": false,
     "target": [
       {
         "target": "nsis",
         "arch": ["x64"]
       },
       {
-        "target": "portable",
+        "target": "zip",
         "arch": ["x64"]
       }
     ],
-    "artifactName": "${productName}-Windows-${version}-${arch}.${ext}"
+    "artifactName": "Modern-Emu8086-Windows-${version}-${arch}.${ext}"
   },
   "nsis": {
     "oneClick": false,

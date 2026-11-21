@@ -14,8 +14,11 @@ import {
   FileCode,
   Binary,
   Wrench,
-  Check
+  Check,
+  Heart,
+  Info
 } from 'lucide-react';
+import { GithubIcon } from './GithubIcon';
 import { EmulatorStatus } from '../types/emulator';
 import { EXAMPLES, ExampleProgram } from '../examples';
 
@@ -39,6 +42,7 @@ interface NavbarProps {
   activeView: 'dual' | 'editor' | 'screen' | 'peripherals';
   onViewChange: (view: 'dual' | 'editor' | 'screen' | 'peripherals') => void;
   onOpenCalculator: () => void;
+  onOpenAbout: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -60,7 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleTheme,
   activeView,
   onViewChange,
-  onOpenCalculator
+  onOpenCalculator,
+  onOpenAbout
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const examplesDropdownRef = useRef<HTMLDivElement>(null);
@@ -94,11 +99,22 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="glass-panel rounded-none border-x-0 border-t-0 shrink-0 select-none relative z-50 overflow-visible">
       {/* 1. Classic Windows/Emu8086 Window Title & Menu Bar */}
       <div className="h-7 px-3 bg-slate-200/40 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs relative">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 font-bold text-slate-700 dark:text-slate-200 font-mono">
             <span className="w-2 h-2 rounded-full bg-blue-500 shadow-sm" />
             <span>emulator: modern_emu8086.com_</span>
           </div>
+
+          {/* Author Badge */}
+          <button
+            onClick={onOpenAbout}
+            className="hidden md:flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30 transition text-[11px] font-bold cursor-pointer"
+            title="Modern Emu8086 by Ravindra Soran (@rsoran)"
+          >
+            <span>by</span>
+            <span className="font-extrabold">rsoran</span>
+            <GithubIcon className="w-3 h-3 ml-0.5" />
+          </button>
 
           {/* Authentic Menu Bar */}
           <div className="hidden sm:flex items-center gap-0.5 text-[11px] font-medium text-slate-600 dark:text-slate-400">
@@ -201,6 +217,47 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
 
+            {/* Help Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setActiveMenu(activeMenu === 'help' ? null : 'help')}
+                className={`px-2 py-0.5 rounded transition ${
+                  activeMenu === 'help' ? 'bg-blue-600 text-white' : 'hover:bg-slate-300/50 dark:hover:bg-slate-800'
+                }`}
+              >
+                help
+              </button>
+              {activeMenu === 'help' && (
+                <div
+                  onMouseLeave={() => setActiveMenu(null)}
+                  className="absolute left-0 top-full mt-1 w-56 glass-panel p-1.5 z-[100] bg-white/95 dark:bg-[#0f172a]/95 border border-slate-300 dark:border-slate-700 shadow-2xl rounded-xl"
+                >
+                  <button
+                    onClick={() => { onOpenAbout(); setActiveMenu(null); }}
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs hover:bg-blue-600 hover:text-white transition flex items-center gap-2"
+                  >
+                    <Info className="w-3.5 h-3.5 text-blue-500" /> About Modern Emu8086...
+                  </button>
+                  <a
+                    href="https://github.com/rsoran/emu8086-modern"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs hover:bg-blue-600 hover:text-white transition flex items-center gap-2"
+                  >
+                    <GithubIcon className="w-3.5 h-3.5" /> GitHub Repository
+                  </a>
+                  <a
+                    href="https://github.com/rsoran"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-xs hover:bg-purple-600 hover:text-white transition flex items-center gap-2 text-purple-600 dark:text-purple-400 font-semibold"
+                  >
+                    <Heart className="w-3.5 h-3.5 fill-current" /> Developer Profile (@rsoran)
+                  </a>
+                </div>
+              )}
+            </div>
+
             <button
               onClick={() => onViewChange(activeView === 'editor' ? 'dual' : 'editor')}
               className="px-2 py-0.5 rounded hover:bg-slate-300/50 dark:hover:bg-slate-800 transition"
@@ -222,8 +279,21 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Liquid Glass Theme Switch */}
+        {/* Right Header: GitHub link & Theme Switch */}
         <div className="flex items-center gap-2">
+          {/* GitHub Profile Link */}
+          <a
+            href="https://github.com/rsoran/emu8086-modern"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-200/70 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition shadow-sm border border-slate-300 dark:border-slate-700"
+            title="View on GitHub: github.com/rsoran/emu8086-modern"
+          >
+            <GithubIcon className="w-3.5 h-3.5" />
+            <span className="hidden lg:inline font-mono">github.com/rsoran</span>
+          </a>
+
+          {/* Theme Switch */}
           <button
             onClick={onToggleTheme}
             className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-200/70 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition shadow-sm border border-slate-300 dark:border-slate-700"
@@ -327,18 +397,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Right Side: Hex Calc, Download, Examples & Status */}
+        {/* Right Side: Download, Hex Calc, Examples & Status */}
         <div className="flex items-center gap-2 shrink-0 relative overflow-visible">
-          {/* Direct Download .EXE Button */}
+          {/* Direct Download Desktop App Button (Points to Latest Release) */}
           <a
-            href="https://github.com/rsoran/emu8086-modern/releases"
+            href="https://github.com/rsoran/emu8086-modern/releases/latest"
             target="_blank"
             rel="noopener noreferrer"
             className="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold gap-1.5 border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 transition shadow-sm active:scale-95 flex items-center"
-            title="Download Modern Emu8086 Desktop Executable (.exe)"
+            title="Download Modern Emu8086 Latest Desktop Release (.exe, .dmg, .AppImage)"
           >
             <Download className="w-3.5 h-3.5 text-emerald-500" />
-            <span className="hidden sm:inline">Download .EXE</span>
+            <span className="hidden sm:inline">Download</span>
           </a>
 
           {/* Hex Calculator Button */}

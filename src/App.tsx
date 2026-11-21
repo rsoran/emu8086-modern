@@ -24,6 +24,7 @@ import { SymbolTable } from './components/SymbolTable';
 import { ConsolePane } from './components/ConsolePane';
 import { BottomBar, BottomTabType } from './components/BottomBar';
 import { HexCalculator } from './components/HexCalculator';
+import { AboutModal } from './components/AboutModal';
 
 import {
   Split,
@@ -66,6 +67,7 @@ export const App: React.FC = () => {
   const [showFlags, setShowFlags] = useState<boolean>(true);
   const [showConsoleDrawer, setShowConsoleDrawer] = useState<boolean>(false);
   const [showCalculator, setShowCalculator] = useState<boolean>(false);
+  const [showAbout, setShowAbout] = useState<boolean>(false);
   const [isSplitView, setIsSplitView] = useState<boolean>(false);
   const [activeConsoleTab, setActiveConsoleTab] = useState<'output' | 'errors' | 'listing'>('output');
 
@@ -354,6 +356,7 @@ export const App: React.FC = () => {
         activeView={activeBottomTab === 'source' ? 'editor' : 'dual'}
         onViewChange={(view) => setActiveBottomTab(view === 'editor' ? 'source' : 'dual')}
         onOpenCalculator={() => setShowCalculator(true)}
+        onOpenAbout={() => setShowAbout(true)}
       />
 
       {/* 2. Middle Main Workspace (Fully Scrollable & Adaptive) */}
@@ -525,6 +528,7 @@ export const App: React.FC = () => {
         showFlags={showFlags}
         onToggleFlags={() => setShowFlags(!showFlags)}
         onOpenCalculator={() => setShowCalculator(true)}
+        onOpenAbout={() => setShowAbout(true)}
       />
 
       {/* 4. Hexadecimal Calculator & Bitwise Verifier Modal */}
@@ -532,6 +536,12 @@ export const App: React.FC = () => {
         isOpen={showCalculator}
         onClose={() => setShowCalculator(false)}
         registers={registers}
+      />
+
+      {/* 5. About Modern Emu8086 Modal (Author: Ravindra Soran @rsoran) */}
+      <AboutModal
+        isOpen={showAbout}
+        onClose={() => setShowAbout(false)}
       />
     </div>
   );
