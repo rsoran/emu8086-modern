@@ -458,6 +458,10 @@ export class Assembler {
     if (token.type === 'IDENTIFIER') {
       const sym = this.symbols[token.value.toUpperCase()];
       if (sym !== undefined) return sym.value;
+      if (/^[0-9a-fA-F]+h$/i.test(token.value)) {
+        const val = parseInt(token.value.slice(0, -1), 16);
+        if (!isNaN(val)) return val;
+      }
     }
     return null;
   }

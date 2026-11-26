@@ -133,7 +133,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
 
       {/* Author Branding & Version */}
       <div className="hidden lg:flex items-center gap-2 text-[11px] font-mono text-slate-500 dark:text-slate-400 shrink-0 border-l border-slate-300 dark:border-slate-800 pl-3">
-        <span className="font-bold text-slate-700 dark:text-slate-300">v1.1</span>
+        <span className="font-bold text-slate-700 dark:text-slate-300">v1.2</span>
         <span>•</span>
         <button
           onClick={onOpenAbout}

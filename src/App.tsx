@@ -53,6 +53,8 @@ export const App: React.FC = () => {
   const [breakpoints, setBreakpoints] = useState<number[]>([]);
   const [currentLine, setCurrentLine] = useState<number | undefined>(undefined);
   const [assembleResult, setAssembleResult] = useState<AssembleResult | null>(null);
+  const [cpuVersion, setCpuVersion] = useState<number>(0);
+  const lastAssembledCodeRef = useRef<string>(EXAMPLES[0].code);
 
   // CPU & Hardware State
   const [registers, setRegisters] = useState<Registers>(cpu.getRegisters());
@@ -104,6 +106,7 @@ export const App: React.FC = () => {
     setRegisters(cpu.getRegisters());
     setFlags({ ...cpu.flags });
     setVideoState({ ...interruptManager.videoState });
+    setCpuVersion(v => v + 1);
 
     // Find active line in source map
     if (assembleResult) {
@@ -115,9 +118,10 @@ export const App: React.FC = () => {
   }, [cpu, registers, assembleResult, interruptManager]);
 
   // Assemble Code
-  const handleAssemble = (sourceCode = code) => {
+  const handleAssemble = (sourceCode = code, switchView = true) => {
     const result = assembler.assemble(sourceCode);
     setAssembleResult(result);
+    lastAssembledCodeRef.current = sourceCode;
 
     if (result.success) {
       cpu.loadProgram(result);
@@ -131,7 +135,9 @@ export const App: React.FC = () => {
       setCurrentLine(firstLine);
 
       syncCpuState();
-      setActiveBottomTab('dual'); // Switch to dual emulator view on load!
+      if (switchView) {
+        setActiveBottomTab(prev => (prev === 'vars' || prev === 'source' ? prev : 'dual'));
+      }
     } else {
       setStatus('error');
       setShowConsoleDrawer(true);
@@ -139,10 +145,60 @@ export const App: React.FC = () => {
     }
   };
 
+  // Live background assembly with debounce to keep symbols and memory synchronized
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (code !== lastAssembledCodeRef.current) {
+        const result = assembler.assemble(code);
+        setAssembleResult(result);
+        if (result.success) {
+          lastAssembledCodeRef.current = code;
+          if (status === 'ready' || cpu.isHalted) {
+            cpu.loadProgram(result);
+            interruptManager.reset();
+            peripheralManager.reset();
+            const firstLine = result.sourceMap.find(m => m.address === result.entryPoint)?.line;
+            setCurrentLine(firstLine);
+            syncCpuState();
+          }
+        }
+      }
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [code, assembler, status, cpu, interruptManager, peripheralManager, syncCpuState]);
+
   // Single Step
   const handleStep = useCallback(() => {
+    // If code has been modified since last assemble, compile and step from start
+    if (code !== lastAssembledCodeRef.current) {
+      const result = assembler.assemble(code);
+      setAssembleResult(result);
+      lastAssembledCodeRef.current = code;
+      if (!result.success) {
+        setStatus('error');
+        setShowConsoleDrawer(true);
+        setActiveConsoleTab('errors');
+        return;
+      }
+      cpu.loadProgram(result);
+      interruptManager.reset();
+      peripheralManager.reset();
+      setOutputText('');
+      setStatus('ready');
+      const firstLine = result.sourceMap.find(m => m.address === result.entryPoint)?.line;
+      setCurrentLine(firstLine);
+      syncCpuState();
+      return;
+    }
+
     if (cpu.isHalted) {
-      setStatus('halted');
+      if (assembleResult?.success) {
+        cpu.loadProgram(assembleResult);
+        interruptManager.reset();
+        peripheralManager.reset();
+        setStatus('ready');
+        syncCpuState();
+      }
       return;
     }
 
@@ -169,7 +225,7 @@ export const App: React.FC = () => {
         }
       }
     }
-  }, [cpu, syncCpuState, assembleResult, breakpoints]);
+  }, [code, cpu, syncCpuState, assembleResult, breakpoints, assembler, interruptManager, peripheralManager]);
 
   // Step Back Execution
   const handleStepBack = () => {
@@ -182,10 +238,22 @@ export const App: React.FC = () => {
 
   // Run Loop
   const handleRun = () => {
-    if (status === 'error' || !assembleResult?.success) {
-      handleAssemble();
-    }
-    if (cpu.isHalted) {
+    // If code was modified or previous assemble failed, re-assemble now!
+    if (code !== lastAssembledCodeRef.current || status === 'error' || !assembleResult?.success) {
+      const result = assembler.assemble(code);
+      setAssembleResult(result);
+      lastAssembledCodeRef.current = code;
+      if (!result.success) {
+        setStatus('error');
+        setShowConsoleDrawer(true);
+        setActiveConsoleTab('errors');
+        return;
+      }
+      cpu.loadProgram(result);
+      interruptManager.reset();
+      peripheralManager.reset();
+      setOutputText('');
+    } else if (cpu.isHalted) {
       if (assembleResult?.success) {
         cpu.loadProgram(assembleResult);
       } else {
@@ -249,14 +317,18 @@ export const App: React.FC = () => {
     syncCpuState();
   };
 
-  // Reset
+  // Reset / Reload
   const handleReset = () => {
     if (runTimerRef.current) {
       window.clearTimeout(runTimerRef.current);
       runTimerRef.current = null;
     }
-    if (assembleResult?.success) {
-      cpu.loadProgram(assembleResult);
+    // Always re-assemble current code on reload
+    const result = assembler.assemble(code);
+    setAssembleResult(result);
+    lastAssembledCodeRef.current = code;
+    if (result.success) {
+      cpu.loadProgram(result);
     } else {
       cpu.reset();
     }
@@ -264,6 +336,8 @@ export const App: React.FC = () => {
     peripheralManager.reset();
     setOutputText('');
     setStatus('ready');
+    const firstLine = result.success ? result.sourceMap.find(m => m.address === result.entryPoint)?.line : undefined;
+    setCurrentLine(firstLine);
     syncCpuState();
   };
 
@@ -491,6 +565,7 @@ export const App: React.FC = () => {
                   <SymbolTable
                     symbols={assembleResult?.symbols || {}}
                     cpu={cpu}
+                    cpuVersion={cpuVersion}
                     onUpdateVariable={() => syncCpuState()}
                   />
                 )}
@@ -523,6 +598,9 @@ export const App: React.FC = () => {
         activeTab={activeBottomTab}
         onTabSelect={(tab) => {
           setActiveBottomTab(tab);
+          if (tab === 'vars' && code !== lastAssembledCodeRef.current) {
+            handleAssemble(code, false);
+          }
         }}
         onReset={handleReset}
         showFlags={showFlags}

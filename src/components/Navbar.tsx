@@ -409,11 +409,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative" ref={downloadDropdownRef}>
             <div className="flex items-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 shadow-sm transition">
               <a
-                href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern-Emu8086-Windows-1.1.0-x64.exe"
+                href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern-Emu8086-Windows-1.2.0-x64.exe"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-2.5 py-1.5 text-xs font-semibold gap-1.5 flex items-center hover:bg-emerald-500/20 transition active:scale-95"
-                title="Direct Download Windows Installer (.exe) - v1.1"
+                title="Direct Download Windows Installer (.exe) - v1.2"
               >
                 <Download className="w-3.5 h-3.5 text-emerald-500" />
                 <span className="hidden sm:inline">Download</span>
@@ -431,7 +431,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="absolute right-0 top-full mt-2 w-72 glass-panel p-2 z-[100] bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-2xl rounded-2xl animate-in fade-in slide-in-from-top-1 duration-150">
                 <div className="px-3 py-1.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Desktop Downloads (v1.1)
+                    Desktop Downloads (v1.2)
                   </span>
                   <span className="text-[10px] font-mono font-bold text-emerald-500">
                     Direct
@@ -439,7 +439,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
                 <div className="p-1 space-y-1">
                   <a
-                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern-Emu8086-Windows-1.1.0-x64.exe"
+                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern-Emu8086-Windows-1.2.0-x64.exe"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full text-left p-2 rounded-xl hover:bg-emerald-600 hover:text-white transition group flex items-center justify-between text-slate-800 dark:text-slate-100"
@@ -456,7 +456,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </a>
 
                   <a
-                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern-Emu8086-Windows-1.1.0-x64.zip"
+                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern-Emu8086-Windows-1.2.0-x64.zip"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full text-left p-2 rounded-xl hover:bg-emerald-600 hover:text-white transition group flex items-center justify-between text-slate-800 dark:text-slate-100"
@@ -473,7 +473,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </a>
 
                   <a
-                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-macOS-1.1.0-arm64.dmg"
+                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern.Emu8086-macOS-1.2.0-arm64.dmg"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full text-left p-2 rounded-xl hover:bg-emerald-600 hover:text-white transition group flex items-center justify-between text-slate-800 dark:text-slate-100"
@@ -490,7 +490,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </a>
 
                   <a
-                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-macOS-1.1.0-x64.dmg"
+                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern.Emu8086-macOS-1.2.0-x64.dmg"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full text-left p-2 rounded-xl hover:bg-emerald-600 hover:text-white transition group flex items-center justify-between text-slate-800 dark:text-slate-100"
@@ -507,7 +507,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </a>
 
                   <a
-                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-Linux-1.1.0-x86_64.AppImage"
+                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern.Emu8086-Linux-1.2.0-x86_64.AppImage"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full text-left p-2 rounded-xl hover:bg-emerald-600 hover:text-white transition group flex items-center justify-between text-slate-800 dark:text-slate-100"
@@ -524,7 +524,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </a>
 
                   <a
-                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.1/Modern.Emu8086-Linux-1.1.0-amd64.deb"
+                    href="https://github.com/rsoran/emu8086-modern/releases/download/v1.2/Modern.Emu8086-Linux-1.2.0-amd64.deb"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full text-left p-2 rounded-xl hover:bg-emerald-600 hover:text-white transition group flex items-center justify-between text-slate-800 dark:text-slate-100"
@@ -542,7 +542,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   <div className="pt-1 mt-1 border-t border-slate-200 dark:border-slate-800">
                     <a
-                      href="https://github.com/rsoran/emu8086-modern/releases/tag/v1.1"
+                      href="https://github.com/rsoran/emu8086-modern/releases/tag/v1.2"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full text-left p-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition flex items-center justify-between text-slate-600 dark:text-slate-400 text-[11px]"

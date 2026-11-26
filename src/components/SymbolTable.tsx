@@ -6,14 +6,16 @@ import { Tag, Search, Variable, Bookmark, Edit3, Check, X, RefreshCw } from 'luc
 interface SymbolTableProps {
   symbols: Record<string, SymbolEntry>;
   cpu?: CPU;
+  cpuVersion?: number;
   onUpdateVariable?: (segment: number, offset: number, value: number, isWord: boolean) => void;
 }
 
-export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdateVariable }) => {
+export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, cpuVersion, onUpdateVariable }) => {
   const [filter, setFilter] = useState('');
   const [category, setCategory] = useState<'all' | 'variables' | 'labels'>('all');
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>('');
+  const [refreshTick, setRefreshTick] = useState(0);
 
   const symbolList = Object.values(symbols).filter(s => {
     const matchesFilter = s.name.toLowerCase().includes(filter.toLowerCase());
@@ -94,15 +96,18 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-900/60 dark:bg-[#0c1222]/80 backdrop-blur-md rounded-xl border border-white/20 dark:border-white/10 overflow-hidden shadow-xl text-slate-800 dark:text-slate-100">
+    <div
+      key={`sym-table-${cpuVersion ?? 0}-${refreshTick}`}
+      className="flex flex-col h-full bg-white/95 dark:bg-[#0c1222]/90 backdrop-blur-md rounded-xl border border-slate-200 dark:border-slate-800/80 overflow-hidden shadow-xl text-slate-800 dark:text-slate-100"
+    >
       {/* Header bar */}
-      <div className="bg-white/40 dark:bg-slate-900/80 border-b border-white/20 dark:border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-slate-50/95 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shrink-0">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400">
+          <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
             <Variable className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
               Variables & Symbol Inspector
             </span>
             <div className="text-[10px] text-slate-500 dark:text-slate-400">
@@ -111,50 +116,61 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
           </div>
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex items-center gap-1 bg-slate-200/50 dark:bg-slate-800/60 p-0.5 rounded-lg border border-slate-300/50 dark:border-slate-700/60 text-[11px] font-semibold">
-          <button
-            onClick={() => setCategory('all')}
-            className={`px-2 py-0.5 rounded-md transition ${
-              category === 'all'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setCategory('variables')}
-            className={`px-2 py-0.5 rounded-md transition ${
-              category === 'variables'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            Variables (DB/DW)
-          </button>
-          <button
-            onClick={() => setCategory('labels')}
-            className={`px-2 py-0.5 rounded-md transition ${
-              category === 'labels'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            Labels
-          </button>
-        </div>
+        {/* Category Filter Pills & Actions */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 bg-slate-200/70 dark:bg-slate-800/80 p-0.5 rounded-lg border border-slate-300 dark:border-slate-700 text-[11px] font-semibold">
+            <button
+              onClick={() => setCategory('all')}
+              className={`px-2 py-0.5 rounded-md transition ${
+                category === 'all'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setCategory('variables')}
+              className={`px-2 py-0.5 rounded-md transition ${
+                category === 'variables'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              Variables (DB/DW)
+            </button>
+            <button
+              onClick={() => setCategory('labels')}
+              className={`px-2 py-0.5 rounded-md transition ${
+                category === 'labels'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              Labels
+            </button>
+          </div>
 
-        {/* Search */}
-        <div className="flex items-center gap-1.5 bg-white/70 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-1">
-          <Search className="w-3.5 h-3.5 text-slate-400" />
-          <input
-            type="text"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            placeholder="Filter vars..."
-            className="bg-transparent text-xs text-slate-800 dark:text-slate-200 outline-none w-28 font-mono placeholder:text-slate-400"
-          />
+          {/* Search */}
+          <div className="flex items-center gap-1.5 bg-white dark:bg-slate-950/80 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-1">
+            <Search className="w-3.5 h-3.5 text-slate-400" />
+            <input
+              type="text"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Filter vars..."
+              className="bg-transparent text-xs text-slate-800 dark:text-slate-200 outline-none w-28 font-mono placeholder:text-slate-400"
+            />
+          </div>
+
+          {/* Refresh Button */}
+          <button
+            onClick={() => setRefreshTick(t => t + 1)}
+            title="Refresh memory values from CPU"
+            className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition shadow-sm active:scale-95"
+          >
+            <RefreshCw className="w-3.5 h-3.5 text-blue-500" />
+          </button>
         </div>
       </div>
 
@@ -163,27 +179,27 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
         {symbolList.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-48 text-slate-400 text-center gap-2">
             <Variable className="w-8 h-8 opacity-40 text-slate-500" />
-            <p className="text-sm font-semibold">No symbols or variables found</p>
-            <p className="text-xs text-slate-500">
-              Assemble your code with <code className="text-blue-400">DB</code>, <code className="text-blue-400">DW</code> or labels to inspect values.
+            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">No symbols or variables found</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Define variables in your code with <code className="text-blue-500 dark:text-blue-400 font-bold">DB</code>, <code className="text-blue-500 dark:text-blue-400 font-bold">DW</code>, or labels to inspect values in real time.
             </p>
           </div>
         ) : (
-          <div className="border border-white/20 dark:border-slate-800 rounded-lg overflow-hidden shadow-sm">
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm bg-white dark:bg-slate-900/50">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-100/70 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800 text-[11px] uppercase tracking-wider font-semibold">
-                  <th className="py-2 px-3">Name</th>
-                  <th className="py-2 px-3">Type</th>
-                  <th className="py-2 px-3">Address</th>
-                  <th className="py-2 px-3">Value (Hex)</th>
-                  <th className="py-2 px-3">Decimal</th>
-                  <th className="py-2 px-3">ASCII Char</th>
-                  <th className="py-2 px-3">Binary</th>
-                  <th className="py-2 px-3 text-right">Defined</th>
+                <tr className="bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 text-[11px] uppercase tracking-wider font-semibold">
+                  <th className="py-2.5 px-3">Name</th>
+                  <th className="py-2.5 px-3">Type</th>
+                  <th className="py-2.5 px-3">Address</th>
+                  <th className="py-2.5 px-3">Value (Hex)</th>
+                  <th className="py-2.5 px-3">Decimal</th>
+                  <th className="py-2.5 px-3">ASCII Char</th>
+                  <th className="py-2.5 px-3">Binary</th>
+                  <th className="py-2.5 px-3 text-right">Defined</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200/50 dark:divide-slate-800/60">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                 {symbolList.map(sym => {
                   const runtime = getVariableRuntimeData(sym);
                   const isEditing = editingKey === sym.name;
@@ -198,10 +214,10 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
                   return (
                     <tr
                       key={sym.name}
-                      className="hover:bg-blue-500/5 dark:hover:bg-blue-400/5 transition duration-150"
+                      className="hover:bg-blue-50/70 dark:hover:bg-blue-900/20 transition duration-150"
                     >
                       {/* Name */}
-                      <td className="py-2 px-3 font-bold text-purple-600 dark:text-purple-300 flex items-center gap-1.5">
+                      <td className="py-2 px-3 font-bold text-purple-700 dark:text-purple-300 flex items-center gap-1.5">
                         {isVar ? (
                           <Variable className="w-3.5 h-3.5 text-blue-500 shrink-0" />
                         ) : (
@@ -226,7 +242,7 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
                       </td>
 
                       {/* Address */}
-                      <td className="py-2 px-3 text-slate-600 dark:text-slate-300 font-semibold font-mono">
+                      <td className="py-2 px-3 text-slate-700 dark:text-slate-300 font-semibold font-mono">
                         {segFormatted}:{offsetFormatted}
                       </td>
 
@@ -262,7 +278,7 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
                           ) : (
                             <div className="flex items-center gap-1 group">
                               <span
-                                className="px-1.5 py-0.5 rounded font-bold font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 cursor-pointer border border-emerald-500/20"
+                                className="px-1.5 py-0.5 rounded font-bold font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 cursor-pointer border border-emerald-500/30"
                                 onClick={() => handleStartEdit(sym, runtime.hex)}
                                 title="Click to edit value"
                               >
@@ -282,12 +298,12 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
                       </td>
 
                       {/* Decimal */}
-                      <td className="py-2 px-3 text-slate-700 dark:text-slate-300 font-mono">
+                      <td className="py-2 px-3 text-slate-800 dark:text-slate-200 font-mono">
                         {runtime ? (
                           <span>
                             {runtime.dec}{' '}
                             {runtime.signedDec !== runtime.dec && (
-                              <span className="text-slate-400 text-[10px]">({runtime.signedDec})</span>
+                              <span className="text-slate-500 dark:text-slate-400 text-[10px]">({runtime.signedDec})</span>
                             )}
                           </span>
                         ) : (
@@ -296,17 +312,17 @@ export const SymbolTable: React.FC<SymbolTableProps> = ({ symbols, cpu, onUpdate
                       </td>
 
                       {/* ASCII Char */}
-                      <td className="py-2 px-3 font-mono text-amber-600 dark:text-amber-400">
+                      <td className="py-2 px-3 font-mono font-bold text-amber-700 dark:text-amber-400">
                         {runtime ? runtime.char : '-'}
                       </td>
 
                       {/* Binary */}
-                      <td className="py-2 px-3 font-mono text-slate-500 dark:text-slate-400 text-[11px]">
+                      <td className="py-2 px-3 font-mono text-slate-600 dark:text-slate-400 text-[11px]">
                         {runtime ? runtime.bin : '-'}
                       </td>
 
                       {/* Defined Line */}
-                      <td className="py-2 px-3 text-right text-slate-400">
+                      <td className="py-2 px-3 text-right text-slate-500 dark:text-slate-400">
                         Line {sym.line}
                       </td>
                     </tr>
