@@ -1,0 +1,16 @@
+{
+  "short_name": "Emu8086",
+  "name": "Modern Emu8086 - 8086 Microprocessor Studio",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0c1222",
+  "background_color": "#0c1222",
+  "description": "Modern cross-platform 8086 Microprocessor Emulator, Assembler, and Bitwise Debugger"
+}
